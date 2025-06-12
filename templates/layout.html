@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
-   
+
     <link rel="icon" type="image/x-icon" href="">
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
+
 <body>
     <header>A name of my website</header>
-    <nav>nav</nav>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('books') }}">Books</a></li>
+            <li><a href="{{ url_for('authors') }}">Authors</a></li>
+            <li><a href="{{ url_for('genres') }}">Genres</a></li>
+        </ul>
+    </nav>
     <main>{% block content %}{% endblock %}</main>
     <footer>(c)2025</footer>
 </body>
+
 </html>

@@ -6,7 +6,22 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template("home.html", title="Books")
+    return render_template("home.html", title="My Book Library")
+
+
+@app.route('/books')
+def books():
+    return render_template("books.html", title='Books')
+
+
+@app.route('/authors')
+def authors():
+    return render_template("authors.html", title="Authors")
+
+
+@app.route('/genres')
+def genres():
+    return render_template("genres.html", title='Genres')
 
 
 @app.route('/pet_rocks/<int:id>')
