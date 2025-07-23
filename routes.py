@@ -6,22 +6,74 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template("home.html", title="My Book Library")
+    conn = sqlite3.connect('books.db')
+    cur = conn.cursor()
+    cur.execute('''
+        SELECT id, name, photo, rating
+        FROM books
+        ORDER BY rating DESC
+        LIMIT 10;
+    ''')
+    books = cur.fetchall()
+    conn.close()
+    return render_template("home.html", title="My Book Library", books=books)
 
 
 @app.route('/books')
 def books():
-    return render_template("books.html", title='Books')
+    conn = sqlite3.connect('books.db')
+    cur = conn.cursor()
+    cur.execute('''
+        SELECT books.id, books.name, books.photo, books.year_published,
+             books.rating, genre.name
+        FROM books
+        JOIN genre ON books.genre_id = genre.id
+        ORDER BY genre.name, books.name;
+    ''')
+    books = cur.fetchall()
+    conn.close()
+    return render_template("books.html", title='Books', books=books)
+
+
+@app.route('/books/<int:id>')
+def book_by_id(id):
+    conn = sqlite3.connect('books.db')
+    cur = conn.cursor()
+    cur.execute('''
+        SELECT books.id, books.name, books.photo, books.year_published,
+            books.rating, books.description, genre.name, author.name
+        FROM books
+        JOIN genre ON books.genre_id = genre.id
+        JOIN author ON books.author_id = author.id
+        WHERE books.id = ?;
+    ''', (id,))
+    book = cur.fetchone()
+    conn.close()
+    return render_template("all_books.html", id=id, book=book)
 
 
 @app.route('/authors')
 def authors():
-    return render_template("authors.html", title="Authors")
+    conn = sqlite3.connect('books.db')
+    cur = conn.cursor()
+    cur.execute('''
+        SELECT id, name, birth_year, nationality, photo, biography
+        FROM author
+        ORDER BY name;
+    ''')
+    authors = cur.fetchall()
+    conn.close()
+    return render_template("authors.html", title="Authors", authors=authors)
 
 
 @app.route('/genres')
 def genres():
-    return render_template("genres.html", title='Genres')
+    conn = sqlite3.connect('books.db')
+    cur = conn.cursor()
+    cur.execute('SELECT id, name, description FROM genre ORDER BY name')
+    genres = cur.fetchall()
+    conn.close()
+    return render_template("genres.html", title='Genres', genres=genres)
 
 
 @app.route('/pet_rocks/<int:id>')

@@ -1,5 +1,15 @@
 {% extends "layout.html" %}
+
 {% block content %}
-<h1>Welcome to my website</h1>
-<hr>
+<h1>Best books</h1>
+<div class="best-books"> <!-- open grid of best books-->
+    {% for book in books %} <!-- jinja loop of books-->
+    <div class="book-card">
+        <!-- Replace with actual image later -->
+        <div class="book-cover">{{ book[1] }}</div>
+        <h3>{{ book[1] }}</h3>
+        <p>Rating: {{ book[3] }}</p> <!-- name and rating -->
+    </div>
+    {% endfor %} <!-- stop loop -->
+</div>
 {% endblock %}

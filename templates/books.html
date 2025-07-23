@@ -1,6 +1,18 @@
 {% extends "layout.html" %}
 {% block content %}
 <!--  a comment -->
-<h1>stuff</h1>
-<hr>
+<h1>All books</h1>
+{% for genre in genres %} <!-- loop the genres for headings-->
+<h2>{{ genre[1] }}</h2>
+<div class="all-books">
+    {% for book in books %}<!-- another loop for books-->
+    <div class="book-card">
+        <div class="book-cover">{{ book[1] }}</div>
+        <h3>{{ book[1] }}</h3>
+        <p>Year: {{ book[3] }}</p>
+        <p>Rating: {{ book[4] }}</p><!-- year and rating-->
+    </div>
+    {% endfor %}
+</div>
+{% endfor %}
 {% endblock %}
