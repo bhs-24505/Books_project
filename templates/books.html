@@ -1,18 +1,20 @@
 {% extends "layout.html" %}
 {% block content %}
-<!--  a comment -->
+<!-- a comment -->
 <h1>All books</h1>
-{% for genre in genres %} <!-- loop the genres for headings-->
+{% for genre in genres %} <!-- Loop the genres for headings -->
 <h2>{{ genre[1] }}</h2>
 <div class="all-books">
-    {% for book in books %}<!-- another loop for books-->
-    <div class="book-card">
-        <div class="book-cover">{{ book[1] }}</div>
-        <h3>{{ book[1] }}</h3>
-        <p>Year: {{ book[3] }}</p>
-        <p>Rating: {{ book[4] }}</p><!-- year and rating-->
-    </div>
+    {% for book in books %} <!-- Another loop for books -->
+        {% if book[5] == genre[1] %} <!-- If function - if book.genre.name = genre.name -->
+        <div class="book-card">
+            <div class="book-cover">{{ genre[1] }}</div> <!-- Replace with actual image later -->
+            <h3>{{ book[1] }}</h3>
+            <p>Year Published: {{ book[3] }}</p>
+            <p>Rating: {{ book[4] }}</p> <!-- Year and rating -->
+        </div>
+        {% endif %}
     {% endfor %}
 </div>
-{% endfor %}
+{% endfor %} <!-- End of loops -->
 {% endblock %}

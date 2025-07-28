@@ -1,5 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Hello</h1>
-<hr>
+<h1>Genres</h1>
+{% for genre in genres %}
+<h2>{{ genre[1] }}</h2>
+<div class="all-genres">
+    <h3>{{ genre[2] }}</h3>
+</div>
+{% endfor %}
 {% endblock %}

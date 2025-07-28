@@ -31,8 +31,12 @@ def books():
         ORDER BY genre.name, books.name;
     ''')
     books = cur.fetchall()
+    cur.execute('''
+        SELECT * FROM genre ORDER by name''')
+    genres = cur.fetchall()
     conn.close()
-    return render_template("books.html", title='Books', books=books)
+    return render_template("books.html", title='Books', books=books,
+                           genres=genres)
 
 
 @app.route('/books/<int:id>')

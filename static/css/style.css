@@ -5,7 +5,14 @@ h1 {
     font-family: 'roboto';
     text-align: center;
     margin-top: 20px;
+    background-color: #f0f0f0;
+    padding: 10px;
 }
+
+h2 {
+    text-align: center;
+}
+
 header {
     background-color:#105232;
     color:white;
@@ -17,6 +24,13 @@ header {
 }
 
 .best-books {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /*AI*/
+    gap: 20px;
+    padding: 20px;
+}
+
+.all-books {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /*AI*/
     gap: 20px;
