@@ -53,4 +53,8 @@ header {
     font-weight: bold;
 }
 
+.all-authors{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
 
