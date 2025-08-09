@@ -4,11 +4,11 @@
 <h1>Top 10 Best books</h1>
 <div class="best-books"> <!-- Open the grid of best books -->
     {% for book in books %} <!-- Jinja loop of books -->
-    <div class="book-card">
+    <div class="book-card"> <!-- Card for each individual book-->
         <div class="book-cover">{{ book[1] }}</div> <!-- Replace with actual image later -->
         <h3>{{ book[1] }}</h3>
         <p>Rating: {{ book[3] }}</p> <!-- Name and rating -->
     </div>
-    {% endfor %} <!-- Stop loop -->
+    {% endfor %} <!-- End of loop -->
 </div>
 {% endblock %}

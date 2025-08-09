@@ -1,20 +1,20 @@
 {% extends "layout.html" %}
 {% block content %}
 <h1>Authors</h1>
-<div class="all-authors">
-    {% for author in authors %}
-    <div class="author-card">
-        <div class="author-left">
-            <div class="author-photo">{{ author[1] }}</div>
+<div class="all-authors"> <!-- Grid that holds rows -->
+    {% for author in authors %} <!-- Looping through all authors -->
+    <div class="author-card"> <!-- Each row -->
+        <div class="author-left"> <!-- Left side of each row -->
+            <div class="author-photo">{{ author[1] }}</div> <!-- Replace with actual image later -->
             <h2>{{ author[1] }}</h2>
         </div>
-        <div class="author-right">
+        <div class="author-right"> <!-- Right side of each row -->
             <h2>{{ author[1] }}</h2>
             <p>Born:{{ author[2] }}</p>
             <p>Nationality:{{ author[3] }}</p>
             <p>Biography:{{ author[5] }}</p>
         </div>
     </div>
-    {% endfor %}
+    {% endfor %} <!-- End of loop -->
 </div>
 {% endblock %}

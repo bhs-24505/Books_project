@@ -13,11 +13,11 @@
 <body>
     <header>A name of my website</header>
     <nav>
-        <ul>
-            <li><a href="{{ url_for('home') }}">Home</a></li> <!-- Generate url for flask functions -->
+        <ul> <!-- Unordered list to contain links -->
+            <li><a href="{{ url_for('home') }}">Home</a></li> <!-- Holds one link each in the nav bar -->
             <li><a href="{{ url_for('books') }}">Books</a></li>
             <li><a href="{{ url_for('authors') }}">Authors</a></li>
-            <li><a href="{{ url_for('genres') }}">Genres</a></li>
+            <li><a href="{{ url_for('genres') }}">Genres</a></li> <!-- Generate url for specific flask functions -->
         </ul>
     </nav>
     <main>{% block content %}{% endblock %}</main>

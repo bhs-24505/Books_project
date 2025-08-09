@@ -24,7 +24,7 @@ header {
 }
 
 .best-books {
-    display: grid;
+    display: grid; /* Grid display */
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /*AI*/
     gap: 20px;
     padding: 20px;
@@ -38,8 +38,8 @@ header {
 }
 
 .book-card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    border: 1px solid #ccc; /* Outline each card */
+    border-radius: 8px; /* Round off corners */
     text-align: center;
     padding: 10px;
 }
@@ -47,14 +47,26 @@ header {
 .book-cover {
     background-color: #f0f0f0;
     height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; /* Makes the container a flexbox */
+    align-items: center; /* Vertical alignment */
+    justify-content: center; /* Horizontal alignment */
     font-weight: bold;
 }
 
 .all-authors{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: grid; /* A grid that holds all author cards, default as one card per row */
 }
 
+.author-card{
+    display: grid; /* Make each row a grid itself */
+    grid-template-columns: 1fr 1fr; /* Spilt into two even columns */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+nav ul{
+    display: flex; /* Make the list a flexbox so links can sit beside each other */
+    justify-content: center;
+    gap:20px;
+}
