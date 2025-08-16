@@ -58,7 +58,16 @@ header {
 }
 
 .author-card{
-    display: grid; /* Make each row a grid itself */
+    display: grid; /* Make each card a grid itself */
+    grid-template-columns: 1fr 1fr; /* Spilt into two even columns */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+
+.detail-card{
+    display: grid; 
     grid-template-columns: 1fr 1fr; /* Spilt into two even columns */
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -67,6 +76,6 @@ header {
 
 nav ul{
     display: flex; /* Make the list a flexbox so links can sit beside each other */
-    justify-content: center;
+    justify-content: center; /* Center the links horizontally */
     gap:20px;
 }

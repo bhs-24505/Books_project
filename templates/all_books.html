@@ -1,5 +1,19 @@
 {% extends "layout.html" %}
 {% block content %}
-
-
+<h1>{{ book[1] }}</h1>
+    <div class="detail-card"> <!-- Book detail card -->
+        <div class="book-left"> <!-- Left side -->
+            <div class="book-photo">{{ book[1] }}</div> <!-- Replace with actual image later -->
+            <h2>{{ book[1] }}</h2>
+            <p>Author:{{ book[7] }}</p>
+            <p>Genre:{{ book[6] }}</p>
+            <p>Year Published: {{ book[3] }}</p> 
+        </div>
+        <div class="book-right"> <!-- Right side -->
+            <h2>{{ book[1] }}</h2>
+            <p>Rating:{{ book[4] }}</p>
+            <p>Description:{{ book[5] }}</p>
+        </div>
+    </div>
+</div>
 {% endblock %}
