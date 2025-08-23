@@ -80,6 +80,11 @@ def genres():
     return render_template("genres.html", title='Genres', genres=genres)
 
 
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template("404.html"), 404
+
+
 @app.route('/pet_rocks/<int:id>')
 def pet_rocks(id):
     return render_template('pet_rocks.html', id=id)

@@ -5,7 +5,7 @@ h1 {
     font-family: 'roboto';
     text-align: center;
     margin-top: 20px;
-    background-color: #f0f0f0;
+    background-color: #D3D3D3;
     padding: 10px;
 }
 
@@ -44,8 +44,12 @@ header {
     padding: 10px;
 }
 
+.book-card a{
+    text-decoration: none; /* Removing underline */
+}
+
 .book-cover {
-    background-color: #f0f0f0;
+    background-color: #D3D3D3;
     height: 200px;
     display: flex; /* Makes the container a flexbox */
     align-items: center; /* Vertical alignment */
@@ -74,8 +78,24 @@ header {
     padding: 10px;
 }
 
+nav{
+    background-color: #D3D3D3;
+}
+
 nav ul{
     display: flex; /* Make the list a flexbox so links can sit beside each other */
     justify-content: center; /* Center the links horizontally */
-    gap:20px;
+    gap:70px;
+    list-style: none; /* Removing Bullet points */
+}
+
+nav a{
+    text-decoration: none; /* Removing underline */
+    font-size: 20px;
+    font-family: 'merriweather';
+    font-weight: 600;
+}
+
+.all-genres{
+    text-align: center;
 }
