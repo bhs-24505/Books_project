@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import sqlite3
 
 app = Flask(__name__)
@@ -83,6 +83,46 @@ def genres():
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template("404.html"), 404
+
+
+@app.route('/search')
+def search():
+    # Get the search input from the url parameter
+    query = request.args.get('query')
+    conn = sqlite3.connect('books.db')
+    cur = conn.cursor()
+    # Search books
+    cur.execute('''
+        SELECT books.id, books.name, books.photo, books.year_published,
+             books.rating, genre.name
+        FROM books
+        JOIN genre ON books.genre_id = genre.id
+        WHERE books.name LIKE ? OR CAST(books.year_published AS TEXT) LIKE ?
+        ORDER BY genre.name, books.name;
+    ''', (f"%{query}%", f"%{query}%"))
+    books = cur.fetchall()
+    # Search authors
+    cur.execute('''
+        SELECT id, name, birth_year, nationality, photo, biography
+        FROM author
+        WHERE author.name LIKE ? OR CAST(author.birth_year AS TEXT) LIKE ?
+        ORDER BY name;
+    ''', (f"%{query}%", f"%{query}%"))
+    authors = cur.fetchall()
+    # Search genres
+    cur.execute('''
+    SELECT id, name, description
+    FROM genre
+    WHERE genre.name LIKE ? OR genre.description LIKE ?
+    ORDER BY name
+    ''', (f"%{query}%", f"%{query}%"))
+    genres = cur.fetchall()
+    # LIKE ? compares data to the input, f"%{query}%" ensures the input is a
+    # string, % in the front and back will match anything that contains the
+    # input, CAST(... AS TEXT) converts integers to strings for LIKE to work
+    conn.close()
+    return render_template("search.html", title="Search Results", books=books,
+                           authors=authors, genres=genres, query=query)
 
 
 @app.route('/pet_rocks/<int:id>')

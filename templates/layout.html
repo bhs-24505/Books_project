@@ -19,6 +19,11 @@
             <li><a href="{{ url_for('authors') }}">Authors</a></li>
             <li><a href="{{ url_for('genres') }}">Genres</a></li> <!-- Generate url for specific flask functions -->
         </ul>
+
+        <form action="{{ url_for('search') }}" method="GET"> <!-- Search form -->
+            <input type="search" name="query" placeholder="Search..." required> <!-- Action: form send to search route, method: add search input to the url -->
+            <button type="submit">Search</button>
+        </form>
     </nav>
     <main>{% block content %}{% endblock %}</main>
     <footer>(c)2025</footer>
