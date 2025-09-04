@@ -5,7 +5,9 @@
 <div class="best-books"> <!-- Open the grid of best books -->
     {% for book in books %} <!-- Jinja loop of books -->
     <div class="book-card"> <!-- Card for each individual book-->
-        <div class="book-cover">{{ book[1] }}</div> <!-- Replace with actual image later -->
+        <div class="book-cover">
+            <img src="{{ url_for('static', filename='images/covers/' + book[2]) }}" alt="{{ book[1] }} cover"> <!-- Book cover image -->
+        </div>
         <h3>{{ book[1] }}</h3>
         <p>Rating: {{ book[3] }}</p> <!-- Name and rating -->
     </div>

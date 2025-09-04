@@ -3,7 +3,9 @@
 <h1>{{ book[1] }}</h1>
     <div class="detail-card"> <!-- Book detail card -->
         <div class="book-left"> <!-- Left side -->
-            <div class="book-photo">{{ book[1] }}</div> <!-- Replace with actual image later -->
+            <div class="book-photo">
+                <img src="{{ url_for('static', filename='images/covers/' + book[2]) }}" alt="{{ book[1] }} cover"> <!-- Book cover image -->
+            </div>
             <h2>{{ book[1] }}</h2>
             <p>Author:{{ book[7] }}</p>
             <p>Genre:{{ book[6] }}</p>

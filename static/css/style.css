@@ -57,6 +57,30 @@ header {
     font-weight: bold;
 }
 
+.book-cover img {
+    max-height: 100%; /* Fit inside container height */
+    max-width: 100%; /* Fit inside container width */
+    object-fit: contain; /* Maintain aspect(height vs width) ratio */
+}
+
+.book-photo {
+    height:350px;
+    display: flex; /* Makes the container a flexbox */
+    align-items: center; /* Vertical alignment */
+    justify-content: center; /* Horizontal alignment */
+    font-weight: bold;
+}
+
+.book-photo img {
+    max-height: 100%; /* Fit inside container height */
+    max-width: 100%; /* Fit inside container width */
+    object-fit: contain; /* Maintain aspect(height vs width) ratio */
+}
+
+.book-left p{
+    text-align: center;
+}
+
 .all-authors{
     display: grid; /* A grid that holds all author cards, default as one card per row */
 }
@@ -67,8 +91,21 @@ header {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 10px;
+    margin: 10px;
 }
 
+.author-photo{
+    display:flex;
+    align-items: center; /* Vertical alignment */
+    justify-content: center; /* Horizontal alignment */
+    font-weight: bold;
+}
+
+.author-photo img {
+    max-height: 100%; /* Fit inside container height */
+    max-width: 100%; /* Fit inside container width */
+    object-fit: contain; /* Maintain aspect(height vs width) ratio */
+}
 
 .detail-card{
     display: grid; 

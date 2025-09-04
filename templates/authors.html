@@ -5,7 +5,9 @@
     {% for author in authors %} <!-- Looping through all authors -->
     <div class="author-card"> <!-- Each card(row) -->
         <div class="author-left"> <!-- Left side of each row -->
-            <div class="author-photo">{{ author[1] }}</div> <!-- Replace with actual image later -->
+            <div class="author-photo">
+                <img src="{{ url_for('static', filename='images/authors/' + author[4]) }}" alt="{{ author[1] }} cover"> <!-- Author photo -->
+            </div>
             <h2>{{ author[1] }}</h2>
         </div>
         <div class="author-right"> <!-- Right side of each row -->

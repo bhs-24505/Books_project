@@ -9,7 +9,9 @@
         {% if book[5] == genre[1] %} <!-- If loop - if book.genre.name = genre.name -->
         <div class="book-card">
             <a href="{{ url_for('book_by_id', id=book[0]) }}"> <!-- Create an url connecting to books detail page based on id -->
-            <div class="book-cover">{{ genre[1] }}</div> <!-- Replace with actual image later -->
+            <div class="book-cover">
+                <img src="{{ url_for('static', filename='images/covers/' + book[2]) }}" alt="{{ book[1] }} cover"> <!-- Book cover image -->
+            </div> 
             <h3>{{ book[1] }}</h3>
             <p>Year Published: {{ book[3] }}</p> 
             <p>Rating: {{ book[4] }}</p> <!-- Year and rating -->
