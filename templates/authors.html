@@ -1,21 +1,15 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Authors</h1>
-<div class="all-authors"> <!-- Grid that holds rows of author cards -->
+<h1>All Authors</h1>
+<div class="all-authors"> 
     {% for author in authors %} <!-- Looping through all authors -->
-    <div class="author-card"> <!-- Each card(row) -->
-        <div class="author-left"> <!-- Left side of each row -->
+    <div class="author-card"> <!-- Cards for authors that have a width of 150px -->
             <div class="author-photo">
                 <img src="{{ url_for('static', filename='images/authors/' + author[4]) }}" alt="{{ author[1] }} cover"> <!-- Author photo -->
             </div>
             <h2>{{ author[1] }}</h2>
-        </div>
-        <div class="author-right"> <!-- Right side of each row -->
-            <h2>{{ author[1] }}</h2>
-            <p>Born:{{ author[2] }}</p>
-            <p>Nationality:{{ author[3] }}</p>
-            <p>Biography:{{ author[5] }}</p>
-        </div>
+            <p>Born: {{ author[2] }}</p>
+            <p>Nationality: {{ author[3] }}</p>
     </div>
     {% endfor %} <!-- End of loop -->
 </div>

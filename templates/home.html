@@ -5,11 +5,13 @@
 <div class="best-books"> <!-- Open the grid of best books -->
     {% for book in books %} <!-- Jinja loop of books -->
     <div class="book-card"> <!-- Card for each individual book-->
+        <a href="{{ url_for('book_by_id', id=book[0]) }}"> <!-- Create an url connecting to books detail page based on id -->
         <div class="book-cover">
             <img src="{{ url_for('static', filename='images/covers/' + book[2]) }}" alt="{{ book[1] }} cover"> <!-- Book cover image -->
         </div>
         <h3>{{ book[1] }}</h3>
         <p>Rating: {{ book[3] }}</p> <!-- Name and rating -->
+        </a>
     </div>
     {% endfor %} <!-- End of loop -->
 </div>

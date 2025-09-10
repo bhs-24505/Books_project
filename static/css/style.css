@@ -25,14 +25,14 @@ header {
 
 .best-books {
     display: grid; /* Grid display */
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /*AI*/
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 20px;
     padding: 20px;
 }
 
 .all-books {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /*AI*/
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 20px;
     padding: 20px;
 }
@@ -81,17 +81,18 @@ header {
     text-align: center;
 }
 
-.all-authors{
-    display: grid; /* A grid that holds all author cards, default as one card per row */
+.all-authors {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px;
 }
 
-.author-card{
-    display: grid; /* Make each card a grid itself */
-    grid-template-columns: 1fr 1fr; /* Spilt into two even columns */
-    border: 1px solid #ccc;
-    border-radius: 8px;
+.author-card {
+    border: 1px solid #ccc; /* Outline each card */
+    border-radius: 8px; /* Round off corners */
+    text-align: center;
     padding: 10px;
-    margin: 10px;
 }
 
 .author-photo{
@@ -99,6 +100,7 @@ header {
     align-items: center; /* Vertical alignment */
     justify-content: center; /* Horizontal alignment */
     font-weight: bold;
+    height:170px;
 }
 
 .author-photo img {
@@ -135,4 +137,17 @@ nav a{
 
 .all-genres{
     text-align: center;
+}
+
+.error-page {
+    text-align: center;
+}
+
+.error-page h1 {
+    font-size: 100px;
+    color: red;
+}
+
+.error-page p {
+    font-size: 20px;
 }

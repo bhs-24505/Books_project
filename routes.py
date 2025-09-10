@@ -35,7 +35,7 @@ def books():
         SELECT * FROM genre ORDER by name''')
     genres = cur.fetchall()
     conn.close()
-    return render_template("books.html", title='Books', books=books,
+    return render_template("books.html", title="Books", books=books,
                            genres=genres)
 
 
@@ -77,12 +77,14 @@ def genres():
     cur.execute('SELECT id, name, description FROM genre ORDER BY name')
     genres = cur.fetchall()
     conn.close()
-    return render_template("genres.html", title='Genres', genres=genres)
+    return render_template("genres.html", title="Genres", genres=genres)
 
 
+# 404 error handler
 @app.errorhandler(404)
-def page_not_found(error):
-    return render_template("404.html"), 404
+def page_not_found(e):
+    return render_template("404.html", title="404 Not Found"), 404
+# Return 404 HTTP status code
 
 
 @app.route('/search')

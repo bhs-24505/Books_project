@@ -7,7 +7,7 @@
 <div class="all-books"> 
     {% for book in books %} <!-- Looping through all books -->
         {% if book[5] == genre[1] %} <!-- If loop - if book.genre.name = genre.name -->
-        <div class="book-card">
+        <div class="book-card"> <!-- Cards for books that have a width of 150px -->
             <a href="{{ url_for('book_by_id', id=book[0]) }}"> <!-- Create an url connecting to books detail page based on id -->
             <div class="book-cover">
                 <img src="{{ url_for('static', filename='images/covers/' + book[2]) }}" alt="{{ book[1] }} cover"> <!-- Book cover image -->
