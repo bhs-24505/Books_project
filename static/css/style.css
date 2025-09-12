@@ -77,6 +77,20 @@ header {
     object-fit: contain; /* Maintain aspect(height vs width) ratio */
 }
 
+.author-photo{
+    height:300px;
+    display:flex;
+    align-items: center; /* Vertical alignment */
+    justify-content: center; /* Horizontal alignment */
+    font-weight: bold;
+}
+
+.author-photo img {
+    max-height: 100%; /* Fit inside container height */
+    max-width: 100%; /* Fit inside container width */
+    object-fit: contain; /* Maintain aspect(height vs width) ratio */
+}
+
 .book-left p{
     text-align: center;
 }
@@ -95,7 +109,7 @@ header {
     padding: 10px;
 }
 
-.author-photo{
+.authors-photo{
     display:flex;
     align-items: center; /* Vertical alignment */
     justify-content: center; /* Horizontal alignment */
@@ -103,7 +117,7 @@ header {
     height:170px;
 }
 
-.author-photo img {
+.authors-photo img {
     max-height: 100%; /* Fit inside container height */
     max-width: 100%; /* Fit inside container width */
     object-fit: contain; /* Maintain aspect(height vs width) ratio */

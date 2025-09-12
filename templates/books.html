@@ -3,10 +3,10 @@
 <!-- a comment -->
 <h1>All books</h1>
 {% for genre in genres %} <!-- Loop the genres for headings/catagories -->
-<h2>{{ genre[1] }}</h2>
+<h2>{{ genre[0] }}</h2>
 <div class="all-books"> 
     {% for book in books %} <!-- Looping through all books -->
-        {% if book[5] == genre[1] %} <!-- If loop - if book.genre.name = genre.name -->
+        {% if book[5] == genre[0] %} <!-- If loop - if book.genre.name = genre.name -->
         <div class="book-card"> <!-- Cards for books that have a width of 150px -->
             <a href="{{ url_for('book_by_id', id=book[0]) }}"> <!-- Create an url connecting to books detail page based on id -->
             <div class="book-cover">

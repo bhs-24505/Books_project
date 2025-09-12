@@ -4,12 +4,14 @@
 <div class="all-authors"> 
     {% for author in authors %} <!-- Looping through all authors -->
     <div class="author-card"> <!-- Cards for authors that have a width of 150px -->
-            <div class="author-photo">
-                <img src="{{ url_for('static', filename='images/authors/' + author[4]) }}" alt="{{ author[1] }} cover"> <!-- Author photo -->
+        <a href="{{ url_for('author_by_id', id=author[0]) }}"> <!-- Create an url connecting to authors detail page based on id -->
+            <div class="authors-photo">
+                <img src="{{ url_for('static', filename='images/authors/' + author[4]) }}" alt="{{ author[1] }} photo"> <!-- Author photo -->
             </div>
             <h2>{{ author[1] }}</h2>
             <p>Born: {{ author[2] }}</p>
             <p>Nationality: {{ author[3] }}</p>
+        </a>
     </div>
     {% endfor %} <!-- End of loop -->
 </div>

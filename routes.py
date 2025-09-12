@@ -10,19 +10,19 @@ def home():
     conn = sqlite3.connect('books.db')
     cur = conn.cursor()
     cur.execute('''
-        SELECT id, name, photo, rating
                 -- Select 10 highest rated books
+        SELECT id, name, photo, rating
         FROM books
-        ORDER BY rating DESC
                 -- From highest rating to lowest
+        ORDER BY rating DESC
         LIMIT 10;
     ''')
     books = cur.fetchall()  # Fetch all results from query
     conn.close()
+    # Render home html, pass title and books as variables for jinja to use
+    # books on the right is the results from the query,
+    # books on the left is the variable
     return render_template("home.html", title="My Book Library", books=books)
-# Render home html, pass title and books as variables for jinja to use
-# books on the right is the results from the query,
-# books on the left is the variable
 
 
 # Route for the books page
@@ -31,27 +31,27 @@ def books():
     conn = sqlite3.connect('books.db')
     cur = conn.cursor()
     cur.execute('''
+                -- Select from books and genre tables
         SELECT books.id, books.name, books.photo, books.year_published,
              books.rating, genre.name
-                -- Select from books and genre tables
         FROM books
-        JOIN genre ON books.genre_id = genre.id
                 -- Join genre_id in books table with id in genre table
-        ORDER BY genre.name, books.name;
+        JOIN genre ON books.genre_id = genre.id
                 -- Order by genre name, then book name alphabetically
+        ORDER BY genre.name, books.name;
     ''')
     books = cur.fetchall()  # Fetch all results from query
-    # Get all genres to categorise books
+    # Get name from genre table ordered by name alphabetically
     cur.execute('''
-        SELECT * FROM genre ORDER by name''')
-    # Get all from genre table ordered by name alphabetically
+        SELECT name FROM genre ORDER by name''')
     genres = cur.fetchall()  # Fetch all results from query
     conn.close()
+    # Render books html, pass title, books and genres as variables for jinja -
+    # to use
+    # books/genres on the right is the results from the query,
+    # books/genres on the left is the variable
     return render_template("books.html", title="Books", books=books,
                            genres=genres)
-# Render books html, pass title, books and genres as variables for jinja to use
-# books/genres on the right is the results from the query,
-# books/genres on the left is the variable
 
 
 # Route for individual book page
@@ -60,24 +60,24 @@ def book_by_id(id):
     conn = sqlite3.connect('books.db')
     cur = conn.cursor()
     cur.execute('''
+                -- Select from books, genre and author tables
         SELECT books.id, books.name, books.photo, books.year_published,
             books.rating, books.description, genre.name, author.name
-                -- Select from books, genre and author tables
         FROM books
-        JOIN genre ON books.genre_id = genre.id
                 -- Join genre_id in books table with id in genre table
-        JOIN author ON books.author_id = author.id
+        JOIN genre ON books.genre_id = genre.id
                 -- Join author_id in books table with id in author table
-        WHERE books.id = ?;
+        JOIN author ON books.author_id = author.id
                 -- ? is a placeholder for the id parameter
+        WHERE books.id = ?;
     ''', (id,))
-    book = cur.fetchone()
     # Fetch the one result from query(the one with the matching id)
+    book = cur.fetchone()
     conn.close()
+    # Render all_books html, pass id and book as variables for jinja to use
+    # book on the right is the result from the query,
+    # book on the left is the variable
     return render_template("all_books.html", id=id, book=book)
-# Render all_books html, pass id and book as variables for jinja to use
-# book on the right is the result from the query,
-# book on the left is the variable
 
 
 # Route for the authors page
@@ -86,21 +86,39 @@ def authors():
     conn = sqlite3.connect('books.db')
     cur = conn.cursor()
     cur.execute('''
-        SELECT id, name, birth_year, nationality, photo
                 -- Select from author table
+        SELECT id, name, birth_year, nationality, photo
         FROM author
-        ORDER BY name;
                 -- Order by name alphabetically
+        ORDER BY name;
     ''')
     authors = cur.fetchall()  # Fetch all results from query
     conn.close()
+    # Render authors html, pass title and authors as variables for jinja to use
+    # authors on the right is the results from the query,
+    # authors on the left is the variable
     return render_template("authors.html", title="Authors", authors=authors)
-# Render authors html, pass title and authors as variables for jinja to use
-# authors on the right is the results from the query,
-# authors on the left is the variable
 
 
 # Route for individual author page
+@app.route('/authors/<int:id>')
+def author_by_id(id):
+    conn = sqlite3.connect('books.db')
+    cur = conn.cursor()
+    cur.execute('''
+                -- Select from author table
+        SELECT id, name, birth_year, nationality, photo, biography
+        FROM author
+                -- ? is a placeholder for the id parameter
+        WHERE id = ?;
+    ''', (id,))
+    # Fetch the one result from query(the one with the matching id)
+    author = cur.fetchone()
+    conn.close()
+    # Render all_authors html, pass id and author as variables for jinja to use
+    # author on the right is the result from the query,
+    # author on the left is the variable
+    return render_template("all_authors.html", id=id, author=author)
 
 
 # Route for genres page
@@ -108,21 +126,21 @@ def authors():
 def genres():
     conn = sqlite3.connect('books.db')
     cur = conn.cursor()
-    cur.execute('SELECT id, name, description FROM genre ORDER BY name')
     # Select from genre table ordered by name alphabetically
+    cur.execute('SELECT id, name, description FROM genre ORDER BY name')
     genres = cur.fetchall()  # Fetch all results from query
     conn.close()
+    # Render genres html, pass title and genres as variables for jinja to use
+    # genres on the right is the results from the query,
+    # genres on the left is the variable
     return render_template("genres.html", title="Genres", genres=genres)
-# Render genres html, pass title and genres as variables for jinja to use
-# genres on the right is the results from the query,
-# genres on the left is the variable
 
 
 # 404 error handler
 @app.errorhandler(404)
 def page_not_found(e):
+    # Return 404 HTTP status code
     return render_template("404.html", title="404 Not Found"), 404
-# Return 404 HTTP status code
 
 
 @app.route('/search')
