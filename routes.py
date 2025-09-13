@@ -74,6 +74,9 @@ def book_by_id(id):
     # Fetch the one result from query(the one with the matching id)
     book = cur.fetchone()
     conn.close()
+    # If no book with that id, return 404 page
+    if book is None:
+        return render_template("404.html", title="404 Not Found"), 404
     # Render all_books html, pass id and book as variables for jinja to use
     # book on the right is the result from the query,
     # book on the left is the variable
@@ -115,6 +118,9 @@ def author_by_id(id):
     # Fetch the one result from query(the one with the matching id)
     author = cur.fetchone()
     conn.close()
+    # If no author with that id, return 404 page
+    if author is None:
+        return render_template("404.html", title="404 Not Found"), 404
     # Render all_authors html, pass id and author as variables for jinja to use
     # author on the right is the result from the query,
     # author on the left is the variable
@@ -136,11 +142,25 @@ def genres():
     return render_template("genres.html", title="Genres", genres=genres)
 
 
-# 404 error handler
+# 404 error handler, for page not found errors
 @app.errorhandler(404)
 def page_not_found(e):
     # Return 404 HTTP status code
     return render_template("404.html", title="404 Not Found"), 404
+
+
+# 500 error handler, for internal server errors
+@app.errorhandler(500)
+def internal_server_error(e):
+    # Return 500 HTTP status code
+    return render_template("500.html", title="500 Internal Server Error"), 500
+
+
+# Broader exception handler for any uncaught errors(dealed as 500 errors)
+@app.errorhandler(Exception)
+def handle_exception(e):
+    # Return 500 HTTP status code
+    return render_template("500.html", title="500 Internal Server Error"), 500
 
 
 @app.route('/search')

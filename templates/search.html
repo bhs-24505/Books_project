@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="search-results">
+    <h1>Search Results for "{{ query }}"</h1> <!-- Display the search input -->
+
+    <!-- Books Section -->
+    <section class="books-section">
+    <h2>Books</h2>
+    {% if books %} <!-- Check if there are any books passed from route -->
+        <div class="all-books">
+            {% for book in books %} <!-- Loop through each book that are fetched -->
+                <div class="book-card">
+                    <a href="{{ url_for('book_by_id', id=book[0]) }}"> <!-- Create an url connecting to books detail page based on id -->
+                    <div class="book-cover">
+                        <img src="{{ url_for('static', filename='images/covers/' + book[2]) }}" alt="{{ book[1] }} cover"> <!-- Book cover image -->
+                    </div>
+                    <h3>{{ book[1] }}</h3>
+                    <p>Genre: {{ book[5] }}</p>
+                    <p>Year Published: {{ book[3] }}</p>
+                    <p>Rating: {{ book[4] }}</p>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %} <!-- If no books found -->
+        <p>No books found for "{{ query }}".</p>
+    {% endif %}
+</section>
+
+    <!-- Authors Section -->
+     <section class="authors-section">
+    <h2>Authors</h2>
+    {% if authors %} <!-- Check if there are any authors passed from route -->
+        <div class="all-authors">
+            {% for author in authors %} <!-- Loop through each author that are fetched -->
+                <div class="author-card">
+                    <a href="{{ url_for('author_by_id', id=author[0]) }}"> <!-- Create an url connecting to authors detail page based on id -->
+                    <div class="authors-photo">
+                        <img src="{{ url_for('static', filename='images/authors/' + author[4]) }}" alt="{{ author[1] }} photo"> <!-- Author photo -->
+                    </div>
+                    <h3>{{ author[1] }}</h3>
+                    <p>Birth Year: {{ author[2] }}</p>
+                    <p>Nationality: {{ author[3] }}</p>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %} <!-- If no authors found -->
+        <p>No authors found for "{{ query }}".</p>
+    {% endif %}
+</section>
+</div>
+{% endblock %}
