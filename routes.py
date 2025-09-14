@@ -62,7 +62,8 @@ def book_by_id(id):
     cur.execute('''
                 -- Select from books, genre and author tables
         SELECT books.id, books.name, books.photo, books.year_published,
-            books.rating, books.description, genre.name, author.name
+            books.rating, books.description, genre.name, author.name,
+            genre.id, author.id
         FROM books
                 -- Join genre_id in books table with id in genre table
         JOIN genre ON books.genre_id = genre.id
@@ -133,13 +134,44 @@ def genres():
     conn = sqlite3.connect('books.db')
     cur = conn.cursor()
     # Select from genre table ordered by name alphabetically
-    cur.execute('SELECT id, name, description FROM genre ORDER BY name')
+    cur.execute('SELECT id, name FROM genre ORDER BY name')
     genres = cur.fetchall()  # Fetch all results from query
     conn.close()
     # Render genres html, pass title and genres as variables for jinja to use
     # genres on the right is the results from the query,
     # genres on the left is the variable
     return render_template("genres.html", title="Genres", genres=genres)
+
+
+# Route for individual genre page
+@app.route('/genres/<int:id>')
+def genre_by_id(id):
+    conn = sqlite3.connect('books.db')
+    cur = conn.cursor()
+    # Select from genre table
+    cur.execute('SELECT id, name, description FROM genre WHERE id = ?', (id,))
+    # Fetch the one result from query(the one with the matching id)
+    genre = cur.fetchone()
+    # If no genre with that id, return 404 page
+    if genre is None:
+        conn.close()
+        return render_template("404.html", title="404 Not Found"), 404
+    # comments need to be updated
+    cur.execute('''
+        SELECT books.id, books.name, books.photo, books.year_published,
+             books.rating, genre.name
+        FROM books
+        JOIN genre ON books.genre_id = genre.id
+        WHERE books.genre_id = ?
+        ORDER BY books.name;
+    ''', (id,))
+    books = cur.fetchall()  # Fetch all results from query
+    conn.close()
+    # Render all_genres html, pass id, genre and books as variables for jinja -
+    # to use
+    # genre/books on the right is the result from the query,
+    # genre/books on the left is the variable
+    return render_template("all_genres.html", id=id, genre=genre, books=books)
 
 
 # 404 error handler, for page not found errors

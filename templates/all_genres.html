@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="genre-detail">
+<h1>{{ genre[1] }}</h1>
+<p>Description: {{ genre[2] }}</p>
+</section>
+
+<section class="books-by-genre">
+<h2>Books in {{ genre[1] }}</h2>
+{% if books %}
+    <div class="all-books">
+        {% for book in books %}
+        <div class="book-card">
+            <a href="{{ url_for('book_by_id', id=book[0]) }}">
+            <div class="book-cover">
+                <img src="{{ url_for('static', filename='images/covers/' + book[2]) }}" alt="{{ book[1] }} cover">
+            </div>
+            <h3>{{ book[1] }}</h3>
+            <p>Author: {{ book[7] }}</p>
+            <p>Rating: {{ book[4] }}</p>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No books found in {{ genre[1] }}.</p>
+    {% endif %}
+</section>
+{% endblock %}

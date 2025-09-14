@@ -28,7 +28,7 @@
 </section>
 
     <!-- Authors Section -->
-     <section class="authors-section">
+    <section class="authors-section">
     <h2>Authors</h2>
     {% if authors %} <!-- Check if there are any authors passed from route -->
         <div class="all-authors">
@@ -47,6 +47,24 @@
         </div>
     {% else %} <!-- If no authors found -->
         <p>No authors found for "{{ query }}".</p>
+    {% endif %}
+</section>
+
+    <!-- Genres Section -->
+    <section class="genres-section">
+    <h2>Genres</h2>
+    {% if genres %} <!-- Check if there are any genres passed from route -->
+        <div class="all-genres">
+            {% for genre in genres %} <!-- Loop through each genre that are fetched -->
+                <div class="genre-card">
+                    <a href="{{ url_for('genre_by_id', id=genre[0]) }}"> <!-- Create an url connecting to genre detail page based on id -->
+                    <p>{{ genre[1] }}</p>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %} <!-- If no genres found -->
+        <p>No genres found for "{{ query }}".</p>
     {% endif %}
 </section>
 </div>

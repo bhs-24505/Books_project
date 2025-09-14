@@ -131,6 +131,22 @@ header {
     padding: 10px;
 }
 
+.all-genres {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.genre-card {
+    border: 1px solid #ccc; /* Outline each card */
+    border-radius: 8px; /* Round off corners */
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    font-size: 20px;
+}
+
 nav{
     background-color: #D3D3D3;
 }
@@ -147,10 +163,6 @@ nav a{
     font-size: 20px;
     font-family: 'merriweather';
     font-weight: 600;
-}
-
-.all-genres{
-    text-align: center;
 }
 
 .error-page {

@@ -1,10 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Genres</h1>
-{% for genre in genres %}
-<h2>{{ genre[1] }}</h2>
+<h1>All Genres</h1>
 <div class="all-genres">
-    <p>{{ genre[2] }}</p>
-</div>
+    {% for genre in genres %}
+    <div class="genre-card">
+        <a href="{{ url_for('genre_by_id', id=genre[0]) }}">
+        <p>{{ genre[1] }}</p>
+        </a>
+    </div>
 {% endfor %}
+</div>
 {% endblock %}
