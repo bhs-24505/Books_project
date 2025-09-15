@@ -31,27 +31,28 @@ def books():
     conn = sqlite3.connect('books.db')
     cur = conn.cursor()
     cur.execute('''
-                -- Select from books and genre tables
+                -- GROUP_CONCAT to combine multiple genres for each book
+                -- into one value, separated by comma and space
         SELECT books.id, books.name, books.photo, books.year_published,
-             books.rating, genre.name
+             books.rating, GROUP_CONCAT(genre.name, ', ') AS genres
         FROM books
-                -- Join genre_id in books table with id in genre table
-        JOIN genre ON books.genre_id = genre.id
-                -- Order by genre name, then book name alphabetically
-        ORDER BY genre.name, books.name;
+                -- Join books and books_genre tables on book id
+        JOIN books_genre ON books.id = books_genre.book_id
+                -- Join books_genre and genre tables on genre id
+        JOIN genre ON books_genre.genre_id = genre.id
+                -- Combine rows with same book id into one row,
+                -- so each book id only has one row,
+                -- complementary to GROUP_CONCAT
+        GROUP BY books.id
+                -- Order the books alphabetically by name
+        ORDER BY books.name;
     ''')
     books = cur.fetchall()  # Fetch all results from query
-    # Get name from genre table ordered by name alphabetically
-    cur.execute('''
-        SELECT name FROM genre ORDER by name''')
-    genres = cur.fetchall()  # Fetch all results from query
-    conn.close()
     # Render books html, pass title, books and genres as variables for jinja -
     # to use
-    # books/genres on the right is the results from the query,
-    # books/genres on the left is the variable
-    return render_template("books.html", title="Books", books=books,
-                           genres=genres)
+    # books on the right is the results from the query,
+    # books on the left is the variable
+    return render_template("books.html", title="Books", books=books)
 
 
 # Route for individual book page
@@ -60,17 +61,25 @@ def book_by_id(id):
     conn = sqlite3.connect('books.db')
     cur = conn.cursor()
     cur.execute('''
-                -- Select from books, genre and author tables
+                -- GROUP_CONCAT to combine multiple genres for each book with
+                -- their id seperated by colon and each genre/id seperated by
+                -- comma and space
         SELECT books.id, books.name, books.photo, books.year_published,
-            books.rating, books.description, genre.name, author.name,
-            genre.id, author.id
+            books.rating, books.description, author.name, author.id,
+            GROUP_CONCAT(genre.name || ':' || genre.id, ', ') AS genres
         FROM books
-                -- Join genre_id in books table with id in genre table
-        JOIN genre ON books.genre_id = genre.id
+                -- Join id in books table with book_id in books_genre table
+        JOIN books_genre ON books.id = books_genre.book_id
+                -- Join genre_id in books_genre table with id in genre table
+        JOIN genre ON books_genre.genre_id = genre.id
                 -- Join author_id in books table with id in author table
         JOIN author ON books.author_id = author.id
                 -- ? is a placeholder for the id parameter
-        WHERE books.id = ?;
+        WHERE books.id = ?
+                -- Combine rows with same book id into one row,
+                -- so each book id only has one row,
+                -- complementary to GROUP_CONCAT
+        GROUP BY books.id;
     ''', (id,))
     # Fetch the one result from query(the one with the matching id)
     book = cur.fetchone()
@@ -156,13 +165,26 @@ def genre_by_id(id):
     if genre is None:
         conn.close()
         return render_template("404.html", title="404 Not Found"), 404
-    # comments need to be updated
     cur.execute('''
+                -- GROUP_CONCAT to combine multiple genres for each book
+                -- into one value, separated by comma and space
         SELECT books.id, books.name, books.photo, books.year_published,
-             books.rating, genre.name
+             books.rating, GROUP_CONCAT(genre.name, ', ') AS genres
         FROM books
-        JOIN genre ON books.genre_id = genre.id
-        WHERE books.genre_id = ?
+                -- Join books and books_genre tables on book id
+        JOIN books_genre ON books.id = books_genre.book_id
+                -- Join books_genre and genre tables on genre id
+        JOIN genre ON books_genre.genre_id = genre.id
+                -- Fetches only the books that have the genre id matching the
+                -- id parameter
+        WHERE books.id IN (
+            SELECT book_id FROM books_genre WHERE genre_id = ?
+        )
+                -- Combine rows with same book id into one row,
+                -- so each book id only has one row,
+                -- complementary to GROUP_CONCAT
+        GROUP BY books.id
+                -- Order the books alphabetically by name
         ORDER BY books.name;
     ''', (id,))
     books = cur.fetchall()  # Fetch all results from query
@@ -171,7 +193,7 @@ def genre_by_id(id):
     # to use
     # genre/books on the right is the result from the query,
     # genre/books on the left is the variable
-    return render_template("all_genres.html", id=id, genre=genre, books=books)
+    return render_template("all_genres.html", genre=genre, books=books)
 
 
 # 404 error handler, for page not found errors
@@ -203,12 +225,22 @@ def search():
     cur = conn.cursor()
     # Search books
     cur.execute('''
+        -- GROUP_CONCAT to combine multiple genres for each book
+                -- into one value, separated by comma and space
         SELECT books.id, books.name, books.photo, books.year_published,
-             books.rating, genre.name
+             books.rating, GROUP_CONCAT(genre.name, ', ') AS genres
         FROM books
-        JOIN genre ON books.genre_id = genre.id
+                -- Join books and books_genre tables on book id
+        JOIN books_genre ON books.id = books_genre.book_id
+                -- Join books_genre and genre tables on genre id
+        JOIN genre ON books_genre.genre_id = genre.id
         WHERE books.name LIKE ? OR CAST(books.year_published AS TEXT) LIKE ?
-        ORDER BY genre.name, books.name;
+                -- Combine rows with same book id into one row,
+                -- so each book id only has one row,
+                -- complementary to GROUP_CONCAT
+        GROUP BY books.id
+                -- Order the books alphabetically by name
+        ORDER BY books.name;
     ''', (f"%{query}%", f"%{query}%"))
     books = cur.fetchall()
     # Search authors
