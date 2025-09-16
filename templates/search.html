@@ -23,7 +23,9 @@
             {% endfor %}
         </div>
     {% else %} <!-- If no books found -->
+        <div class="no-results">
         <p>No books found for "{{ query }}".</p>
+        </div>
     {% endif %}
 </section>
 
@@ -31,9 +33,9 @@
     <section class="authors-section">
     <h2>Authors</h2>
     {% if authors %} <!-- Check if there are any authors passed from route -->
-        <div class="all-authors">
+        <div class="all-books">
             {% for author in authors %} <!-- Loop through each author that are fetched -->
-                <div class="author-card">
+                <div class="book-card">
                     <a href="{{ url_for('author_by_id', id=author[0]) }}"> <!-- Create an url connecting to authors detail page based on id -->
                     <div class="authors-photo">
                         <img src="{{ url_for('static', filename='images/authors/' + author[4]) }}" alt="{{ author[1] }} photo"> <!-- Author photo -->
@@ -46,7 +48,9 @@
             {% endfor %}
         </div>
     {% else %} <!-- If no authors found -->
+        <div class="no-results">
         <p>No authors found for "{{ query }}".</p>
+        </div>
     {% endif %}
 </section>
 
@@ -54,7 +58,7 @@
     <section class="genres-section">
     <h2>Genres</h2>
     {% if genres %} <!-- Check if there are any genres passed from route -->
-        <div class="all-genres">
+        <div class="all-books">
             {% for genre in genres %} <!-- Loop through each genre that are fetched -->
                 <div class="genre-card">
                     <a href="{{ url_for('genre_by_id', id=genre[0]) }}"> <!-- Create an url connecting to genre detail page based on id -->
@@ -64,7 +68,9 @@
             {% endfor %}
         </div>
     {% else %} <!-- If no genres found -->
+    <div class="no-results">
         <p>No genres found for "{{ query }}".</p>
+    </div>
     {% endif %}
 </section>
 </div>

@@ -221,6 +221,11 @@ def handle_exception(e):
 def search():
     # Get the search input from the url parameter
     query = request.args.get('query')
+    MAX_LENGTH = 40
+    if len(query) > MAX_LENGTH:
+        return (
+            render_template("500.html", title="500 Internal Server Error"), 500
+        )
     conn = sqlite3.connect('books.db')
     cur = conn.cursor()
     # Search books

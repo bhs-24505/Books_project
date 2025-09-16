@@ -2,7 +2,7 @@
 {% block content %}
 <h1>{{ book[1] }}</h1>
     <div class="detail-card"> <!-- Book detail card -->
-        <div class="book-left"> <!-- Left side -->
+        <div class="detail-left"> <!-- Left side -->
             <div class="book-photo">
                 <img src="{{ url_for('static', filename='images/covers/' + book[2]) }}" alt="{{ book[1] }} cover"> <!-- Book cover image -->
             </div>
@@ -16,7 +16,7 @@
             </p>
             <p>Year Published: {{ book[3] }}</p> 
         </div>
-        <div class="book-right"> <!-- Right side -->
+        <div class="detail-right"> <!-- Right side -->
             <h2>{{ book[1] }}</h2>
             <p>Rating: {{ book[4] }}</p>
             <p>Description: {{ book[5] }}</p>

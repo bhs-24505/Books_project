@@ -11,7 +11,10 @@
 </head>
 
 <body>
-    <header>A name of my website</header>
+    <header>
+        <h1>My Book Library</h1>
+        <h2>Explore and discover your favorite books</h2>
+    </header>
     <nav>
         <ul> <!-- Unordered list to contain links -->
             <li><a href="{{ url_for('home') }}">Home</a></li> <!-- Holds one link each in the nav bar -->
@@ -21,12 +24,15 @@
         </ul>
 
         <form action="{{ url_for('search') }}" method="GET"> <!-- Search form -->
-            <input type="search" name="query" placeholder="Search..." required> <!-- Action: form send to search route, method: add search input to the url -->
+            <input type="search" name="query" placeholder="Search..." required maxlength="40"> <!-- Action: form send to search route, method: add search input to the url -->
             <button type="submit">Search</button>
         </form>
     </nav>
     <main>{% block content %}{% endblock %}</main>
-    <footer>(c)2025</footer>
+    <footer>
+        <p>&copy; 2025 My Book Library. All rights reserved.</p>
+        <p>All sources from <a href="https://www.goodreads.com/" target="_blank">Goodreads</a></p> <!-- Target _blank opens the link in a new tab -->
+    </footer>
 </body>
 
 </html>

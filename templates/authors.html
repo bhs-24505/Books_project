@@ -1,14 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
 <h1>All Authors</h1>
-<div class="all-authors"> 
+<div class="all-books"> 
     {% for author in authors %} <!-- Looping through all authors -->
-    <div class="author-card"> <!-- Cards for authors that have a width of 150px -->
+    <div class="book-card"> <!-- Cards for authors that have a width of 150px -->
         <a href="{{ url_for('author_by_id', id=author[0]) }}"> <!-- Create an url connecting to authors detail page based on id -->
             <div class="authors-photo">
                 <img src="{{ url_for('static', filename='images/authors/' + author[4]) }}" alt="{{ author[1] }} photo"> <!-- Author photo -->
             </div>
-            <h2>{{ author[1] }}</h2>
+            <h3>{{ author[1] }}</h3>
             <p>Born: {{ author[2] }}</p>
             <p>Nationality: {{ author[3] }}</p>
         </a>

@@ -1,66 +1,160 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 h1 {
-    color:blue;
+    color:#184525;
     font-family: 'roboto';
-    text-align: center;
-    margin-top: 20px;
-    background-color: #D3D3D3;
+    text-align: center;;
     padding: 10px;
+    background-color: #C5FAD3;
 }
 
 h2 {
     text-align: center;
 }
 
-header {
-    background-color:#105232;
+header h1 {
+    background-color:#138b45;
     color:white;
     text-align: center;
     font-family: 'merriweather';
     font-weight: 700;
     padding: 35px;
     font-size: 40px;
+    margin:0;
+    margin-bottom:-15px; /* To slightly overlap the h2 */
 }
 
-.best-books {
-    display: grid; /* Grid display */
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 20px;
-    padding: 20px;
+header h2 {
+    background-color:#138b45;
+    text-align: center;
+    font-family: 'merriweather';
+    font-weight: 500;
+    font-size: 15px;
+    color: white;
+    margin:0;
+    padding-bottom: 20px;
 }
 
 .all-books {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Auto fill grid with minimum column width of 150px(1fr) */
     gap: 20px;
     padding: 20px;
 }
 
 .book-card {
-    border: 1px solid #ccc; /* Outline each card */
+    background-color: #F0FFF4;
+    border: 1px solid #C0E6C8; /* Outline each card */
     border-radius: 8px; /* Round off corners */
     text-align: center;
-    padding: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect, 0px horizontal, 4px vertical, 8px blur, light black color */
+    transition: transform 0.2s, box-shodow 0.2; /* Smooth transition for hover effect */
+}
+
+.book-card:hover {
+    transform: translateY(-5px); /* Slightly lift the card on hover */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Darker shadow on hover, more lifted and blurred, slightly darker */
+}
+
+.book-card h3 {
+    color: #184525; 
+    margin: 10px 0 5px 0; /* Top 10px, Bottom 5px, Left & Right 0 */
+    font-size: 18px;
+    font-family: 'roboto', serif; /* Serif as a backup */
+}
+
+.book-card p {
+    color: #333; 
+    font-size: 14px;
+    margin: 10px 0; /* Top & Bottom 10px, Left & Right 0 */
+    font-family: 'roboto', serif; /* Serif as a backup */
 }
 
 .book-card a{
     text-decoration: none; /* Removing underline */
 }
 
+.book-card a:hover{
+    text-decoration: underline; /* Underline on hover */
+    color: #0b3a1e;
+}
+
 .book-cover {
-    background-color: #D3D3D3;
+    background-color: #F0FFF4;
     height: 200px;
     display: flex; /* Makes the container a flexbox */
     align-items: center; /* Vertical alignment */
     justify-content: center; /* Horizontal alignment */
-    font-weight: bold;
+    border-radius: 8px;
+    overflow: hidden; /* Ensures image doesn't overflow the container */
 }
 
 .book-cover img {
     max-height: 100%; /* Fit inside container height */
     max-width: 100%; /* Fit inside container width */
     object-fit: contain; /* Maintain aspect(height vs width) ratio */
+    transition: transform 0.3s; /* Smooth transition for hover effect */
+}
+
+.book-cover img:hover {
+    transform: scale(1.05); /* Slightly enlarge the image on hover */
+}
+
+.authors-photo {
+    background-color: #F0FFF4;
+    height: 170px;
+    display: flex; /* Makes the container a flexbox */
+    align-items: center; /* Vertical alignment */
+    justify-content: center; /* Horizontal alignment */
+    border-radius: 8px;
+    overflow: hidden; /* Ensures image doesn't overflow the container */
+}
+
+.authors-photo img {
+    max-height: 100%; /* Fit inside container height */
+    max-width: 100%; /* Fit inside container width */
+    object-fit: contain; /* Maintain aspect(height vs width) ratio */
+    transition: transform 0.3s; /* Smooth transition for hover effect */
+}
+
+.authors-photo img:hover {
+    transform: scale(1.05); /* Slightly enlarge the image on hover */
+}
+
+.genre-card {
+    background-color: #F0FFF4;
+    border: 1px solid #C0E6C8; /* Outline each card */
+    border-radius: 8px; /* Round off corners */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect, 0px horizontal, 4px vertical, 8px blur, light black color */
+    transition: transform 0.2s, box-shodow 0.2; /* Smooth transition for hover effect */
+    padding: 10px;
+    margin: 10px;
+    font-size: 20px;
+    height: 70px;
+    display: flex; /* Makes the container a flexbox */
+    align-items: center; /* Vertical alignment */
+    justify-content: center; /* Horizontal alignment */
+}
+
+.genre-card:hover {
+    transform: translateY(-5px); /* Slightly lift the card on hover */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Darker shadow on hover, more lifted and blurred, slightly darker */
+}
+
+.genre-card p {
+    color:#184525;
+    font-family: 'roboto', serif; /* Serif as a backup */
+}
+
+.genre-card a{
+    text-decoration: none; /* Removing underline */
+}
+
+.genre-card a:hover{
+    text-decoration: underline; /* Underline on hover */
+    color: #0b3a1e;
 }
 
 .book-photo {
@@ -91,78 +185,136 @@ header {
     object-fit: contain; /* Maintain aspect(height vs width) ratio */
 }
 
-.book-left p{
-    text-align: center;
-}
-
-.all-authors {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 20px;
-    padding: 20px;
-}
-
-.author-card {
-    border: 1px solid #ccc; /* Outline each card */
-    border-radius: 8px; /* Round off corners */
-    text-align: center;
-    padding: 10px;
-}
-
-.authors-photo{
-    display:flex;
-    align-items: center; /* Vertical alignment */
-    justify-content: center; /* Horizontal alignment */
-    font-weight: bold;
-    height:170px;
-}
-
-.authors-photo img {
-    max-height: 100%; /* Fit inside container height */
-    max-width: 100%; /* Fit inside container width */
-    object-fit: contain; /* Maintain aspect(height vs width) ratio */
-}
-
 .detail-card{
+    background-color:#F0FFF4;
+    border: 1px solid #C0E6C8;
+    border-radius: 12px;
     display: grid; 
     grid-template-columns: 1fr 1fr; /* Spilt into two even columns */
     border: 1px solid #ccc;
     border-radius: 8px;
-    padding: 10px;
-}
-
-.all-genres {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 20px;
     padding: 20px;
+    gap: 20px; /* Space between left and right */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect, 0px horizontal, 4px vertical, 8px blur, light black color */
+    font-family: 'roboto', serif; /* Serif as a backup */
 }
 
-.genre-card {
-    border: 1px solid #ccc; /* Outline each card */
-    border-radius: 8px; /* Round off corners */
+.detail-left, .detail-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center images and text horizontally */
+}
+
+.detail-left p, .detail-right p {
     text-align: center;
+    font-size: 15px; /* Slightly larger for readability */
+    color: #333; 
+    line-height: 1.5; /* Better readability */
+}
+
+.detail-left h2, .detail-right h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #184525; 
+}
+
+.detail-left a, .detail-right a {
+    text-decoration: none; /* Remove underline */
+    color: #333;      
+}
+
+.detail-left a:hover, .detail-right a:hover {
+    text-decoration: underline; /* Underline on hover */
+    color: #0b3a1e; 
+}
+
+.genre-detail p {
+    text-align: center;
+    font-size: 15px;
+    color: #333; 
+    line-height: 1.5; /* Better readability */
+    margin: 10px 100px 40px 100px; /* Top 10px, Bottom 40px, Left & Right 30px */
+    font-family: 'roboto', serif; /* Serif as a backup */
+}
+
+.books-by-genre h2, .books-section h2, .genres-section h2, .authors-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #184525;
+    background-color: #C5FAD3;
+    font-family: 'roboto', serif; /* Serif as a backup */
     padding: 10px;
-    margin: 10px;
-    font-size: 20px;
+}
+
+.no-results {
+    text-align: center;
+    font-size: 15px;
+    color: #333;
+    margin: 20px 0;
+    font-family: 'roboto', serif; /* Serif as a backup */
+    margin: 10px 100px 40px 100px; /* Top 10px, Bottom 40px, Left & Right 30px */
 }
 
 nav{
-    background-color: #D3D3D3;
+    display:flex; /* Makes nav a flexbox so the links and search bar can sit beside each other */
+    justify-content: space-between; /* Space out the links and search bar */
+    padding: 10px 20px; /* Padding around the nav */
+    align-items: center; /* Vertically align items in the center */
+    background-color: #7fb285;
+    font-family: 'merriweather';
 }
 
 nav ul{
     display: flex; /* Make the list a flexbox so links can sit beside each other */
     justify-content: center; /* Center the links horizontally */
-    gap:70px;
+    gap:45px;
     list-style: none; /* Removing Bullet points */
+    padding: 0; /* Removing default padding */
+    margin: 0; /* Removing default margin */
 }
 
 nav a{
+    display: inline-block; /* So padding and margin can be applied without breaking to a new line */
+    background-color: #15944a;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px; /* Rounded corners */
     text-decoration: none; /* Removing underline */
-    font-size: 20px;
+    font-size: 17px;
     font-family: 'merriweather';
     font-weight: 600;
+    transition: background-color 0.3s; /* Transition for hover effect */
+}
+
+nav a:hover{
+    background-color: #0b3a1e; 
+}
+
+nav form {
+    display: flex; /* Make the form a flexbox so input and button can sit beside each other */
+    align-items: center; /* Vertically align items in the center */
+}
+
+nav form input[type="search"] {
+    padding: 10px 15px;
+    border: 2px solid #15944a;
+    border-radius: 10px;
+    font-size: 17px;
+}
+
+nav form button {
+    padding: 10px 15px;
+    border: none; /* Remove default border */
+    background-color: #15944a; 
+    color: white;
+    border-radius: 5px; /* Rounded corners */
+    font-size: 17px;
+    margin-left: 10px; /* Space between input and button */
+    transition: background-color 0.3s; /* Transition for hover effect */
+}
+
+nav form button:hover {
+    background-color: #0b3a1e; 
 }
 
 .error-page {
@@ -172,8 +324,36 @@ nav a{
 .error-page h1 {
     font-size: 100px;
     color: red;
+    font-family: 'merriweather', serif; /* Serif as a backup */
 }
 
 .error-page p {
     font-size: 20px;
+    color: #333;
+    font-family: 'roboto', serif; /* Serif as a backup */
+}
+
+footer {
+    background-color: #000; 
+    color: white;
+    text-align: center;
+    padding: 20px 0px; 
+    margin-top: 40px; /* Space above footer */
+    font-family: 'roboto', serif;
+    font-size: 14px;
+}
+
+footer p {
+    margin: 5px 0; /* Reduce spacing between lines */
+}
+
+footer a {
+    color: #4CAF50; 
+    text-decoration: none;
+    font-weight: 500;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: #66bb6a; 
 }

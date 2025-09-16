@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1>Top 10 Best books</h1>
-<div class="best-books"> <!-- Open the grid of best books -->
+<h1>Top 10 Best Books</h1>
+<div class="all-books"> <!-- Open the grid of best books -->
     {% for book in books %} <!-- Jinja loop of books -->
     <div class="book-card"> <!-- Card for each individual book-->
         <a href="{{ url_for('book_by_id', id=book[0]) }}"> <!-- Create an url connecting to books detail page based on id -->
