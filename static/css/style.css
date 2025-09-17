@@ -49,7 +49,7 @@ header h2 {
     text-align: center;
     padding: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect, 0px horizontal, 4px vertical, 8px blur, light black color */
-    transition: transform 0.2s, box-shodow 0.2; /* Smooth transition for hover effect */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition for hover effect */
 }
 
 .book-card:hover {
@@ -128,7 +128,7 @@ header h2 {
     border-radius: 8px; /* Round off corners */
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect, 0px horizontal, 4px vertical, 8px blur, light black color */
-    transition: transform 0.2s, box-shodow 0.2; /* Smooth transition for hover effect */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition(0.2s) for hover effect */
     padding: 10px;
     margin: 10px;
     font-size: 20px;

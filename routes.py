@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
 
 app = Flask(__name__)
@@ -217,10 +217,13 @@ def handle_exception(e):
     return render_template("500.html", title="500 Internal Server Error"), 500
 
 
+# Route for search page
 @app.route('/search')
 def search():
     # Get the search input from the url parameter
     query = request.args.get('query')
+    # maximum length of input is 40 characters, anything longer is treated
+    # as a potential attack and returns 500 error page
     MAX_LENGTH = 40
     if len(query) > MAX_LENGTH:
         return (
@@ -230,7 +233,7 @@ def search():
     cur = conn.cursor()
     # Search books
     cur.execute('''
-        -- GROUP_CONCAT to combine multiple genres for each book
+                -- GROUP_CONCAT to combine multiple genres for each book
                 -- into one value, separated by comma and space
         SELECT books.id, books.name, books.photo, books.year_published,
              books.rating, GROUP_CONCAT(genre.name, ', ') AS genres
@@ -239,6 +242,9 @@ def search():
         JOIN books_genre ON books.id = books_genre.book_id
                 -- Join books_genre and genre tables on genre id
         JOIN genre ON books_genre.genre_id = genre.id
+                -- LIKE ? compares data to the input
+                -- CAST(... AS TEXT) converts integers to strings for LIKE to
+                -- work
         WHERE books.name LIKE ? OR CAST(books.year_published AS TEXT) LIKE ?
                 -- Combine rows with same book id into one row,
                 -- so each book id only has one row,
@@ -246,55 +252,75 @@ def search():
         GROUP BY books.id
                 -- Order the books alphabetically by name
         ORDER BY books.name;
+                -- f"%{query}%" ensures the input is a string, % is a wildcard
+                -- placed in the front and back, it will match anything that
+                -- contains the input
     ''', (f"%{query}%", f"%{query}%"))
-    books = cur.fetchall()
+    books = cur.fetchall()  # Fetch all results from query
     # Search authors
     cur.execute('''
         SELECT id, name, birth_year, nationality, photo, biography
         FROM author
+                -- LIKE ? compares data to the input
         WHERE author.name LIKE ? OR CAST(author.birth_year AS TEXT) LIKE ?
+                -- Order by name alphabetically
         ORDER BY name;
+                -- f"%{query}%" ensures the input is a string, % is a wildcard
+                -- placed in the front and back, it will match anything that
+                -- contains the input
     ''', (f"%{query}%", f"%{query}%"))
-    authors = cur.fetchall()
+    authors = cur.fetchall()  # Fetch all results from query
     # Search genres
     cur.execute('''
-    SELECT id, name, description
-    FROM genre
-    WHERE genre.name LIKE ? OR genre.description LIKE ?
-    ORDER BY name
+        SELECT id, name, description
+        FROM genre
+                -- LIKE ? compares data to the input
+        WHERE genre.name LIKE ? OR genre.description LIKE ?
+                -- Order by name alphabetically
+        ORDER BY name
+                -- f"%{query}%" ensures the input is a string, % is a wildcard
+                -- placed in the front and back, it will match anything that
+                -- contains the input
     ''', (f"%{query}%", f"%{query}%"))
-    genres = cur.fetchall()
-    # LIKE ? compares data to the input, f"%{query}%" ensures the input is a
-    # string, % in the front and back will match anything that contains the
-    # input, CAST(... AS TEXT) converts integers to strings for LIKE to work
+    genres = cur.fetchall()  # Fetch all results from query
     conn.close()
+    # Render search html, pass title, books, authors, genres and query as
+    # variables for jinja to use
+    # books/authors/genres on the right is the results from the query,
+    # books/authors/genres on the left is the variable
     return render_template("search.html", title="Search Results", books=books,
                            authors=authors, genres=genres, query=query)
 
 
-@app.route('/pet_rocks/<int:id>')
-def pet_rocks(id):
-    return render_template('pet_rocks.html', id=id)
-
-
-@app.route('/all_pizzas')
-def all_pizzas():
-    conn = sqlite3.connect('flask/pizza.db')
-    cur = conn.cursor()
-    cur.execute('SELECT * from Pizza')  # select id,name
-    pizzas = cur.fetchall()  # all = list(none), one = a thing(none will break)
-    conn.close()
-    return render_template('all_pizzas.html', pizzas=pizzas)
-
-
-@app.route('/all_pizzas/<int:id>')
-def pizza_by_id(id):
-    conn = sqlite3.connect('flask/pizza.db')
-    cur = conn.cursor()
-    cur.execute('SELECT * FROM pizza WHERE id = ?', (id,))
-    pizza = cur.fetchone()
-    conn.close()
-    return render_template('pizza.html', pizza=pizza)
+# Route for login page
+# GET method to display the login form
+# POST method to process the login form submission
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    # If user submits form
+    if request.method == "POST":
+        # Get username and password from form
+        username = request.form["username"]
+        password = request.form["password"]
+        conn = sqlite3.connect('books.db')
+        cur = conn.cursor()
+        cur.execute('''
+                    -- Check if username and password match a user in users
+                    -- table
+            SELECT * FROM users WHERE username = ? AND password = ?;
+        ''', (username, password))
+        user = cur.fetchone()  # Fetch the one result from query
+        conn.close()
+        # If user exists, login successful
+        if user:
+            # Store user id in session, so user can stay logged in across pages
+            session["user_id"] = user[0]
+            return redirect(url_for("home"))  # Redirect to home page
+        # If user does not exist, login failed
+        else:
+            return "Invalid username or password"
+    # If user just visits the login page, display the login form
+    return render_template("login.html", title="Login")
 
 
 if __name__ == '__main__':
