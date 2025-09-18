@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 h1 {
     color:#184525;
-    font-family: 'roboto';
-    text-align: center;;
+    font-family: 'roboto', serif; /* Serif as a backup */
+    text-align: center;
     padding: 10px;
     background-color: #C5FAD3;
 }
@@ -16,7 +16,7 @@ header h1 {
     background-color:#138b45;
     color:white;
     text-align: center;
-    font-family: 'merriweather';
+    font-family: 'merriweather', serif; /* Serif as a backup */
     font-weight: 700;
     padding: 35px;
     font-size: 40px;
@@ -27,7 +27,7 @@ header h1 {
 header h2 {
     background-color:#138b45;
     text-align: center;
-    font-family: 'merriweather';
+    font-family: 'merriweather', serif; /* Serif as a backup */
     font-weight: 500;
     font-size: 15px;
     color: white;
@@ -35,26 +35,28 @@ header h2 {
     padding-bottom: 20px;
 }
 
+/* grid layout for most htmls */
 .all-books {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Auto fill grid with minimum column width of 150px(1fr) */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Auto fill grid with minimum column width of 150px and maximum of 1fr */
     gap: 20px;
     padding: 20px;
 }
 
+/* Book cards css, used for some other cards as well */
 .book-card {
     background-color: #F0FFF4;
-    border: 1px solid #C0E6C8; /* Outline each card */
+    border: 1px solid #C0E6C8;
     border-radius: 8px; /* Round off corners */
     text-align: center;
     padding: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect, 0px horizontal, 4px vertical, 8px blur, light black color */
-    transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition for hover effect */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth transform and box-shadow transition(0.2s) for hover effect */
 }
 
 .book-card:hover {
     transform: translateY(-5px); /* Slightly lift the card on hover */
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Darker shadow on hover, more lifted and blurred, slightly darker */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Darker shadow on hover, more lifted vertically and blurred, slightly darker */
 }
 
 .book-card h3 {
@@ -71,6 +73,7 @@ header h2 {
     font-family: 'roboto', serif; /* Serif as a backup */
 }
 
+/* Link styles of book cards */
 .book-card a{
     text-decoration: none; /* Removing underline */
 }
@@ -86,7 +89,7 @@ header h2 {
     display: flex; /* Makes the container a flexbox */
     align-items: center; /* Vertical alignment */
     justify-content: center; /* Horizontal alignment */
-    border-radius: 8px;
+    border-radius: 8px; /* Round off corners */
     overflow: hidden; /* Ensures image doesn't overflow the container */
 }
 
@@ -94,20 +97,21 @@ header h2 {
     max-height: 100%; /* Fit inside container height */
     max-width: 100%; /* Fit inside container width */
     object-fit: contain; /* Maintain aspect(height vs width) ratio */
-    transition: transform 0.3s; /* Smooth transition for hover effect */
+    transition: transform 0.3s; /* Smooth transform transition(0.3s) for hover effect */
 }
 
 .book-cover img:hover {
     transform: scale(1.05); /* Slightly enlarge the image on hover */
 }
 
+/* All authors html photo css */
 .authors-photo {
     background-color: #F0FFF4;
     height: 170px;
     display: flex; /* Makes the container a flexbox */
     align-items: center; /* Vertical alignment */
     justify-content: center; /* Horizontal alignment */
-    border-radius: 8px;
+    border-radius: 8px; /* Round off corners */
     overflow: hidden; /* Ensures image doesn't overflow the container */
 }
 
@@ -115,20 +119,21 @@ header h2 {
     max-height: 100%; /* Fit inside container height */
     max-width: 100%; /* Fit inside container width */
     object-fit: contain; /* Maintain aspect(height vs width) ratio */
-    transition: transform 0.3s; /* Smooth transition for hover effect */
+    transition: transform 0.3s; /* Smooth transform transition(0.3s) for hover effect */
 }
 
 .authors-photo img:hover {
     transform: scale(1.05); /* Slightly enlarge the image on hover */
 }
 
+/* Genre cards css */
 .genre-card {
     background-color: #F0FFF4;
-    border: 1px solid #C0E6C8; /* Outline each card */
+    border: 1px solid #C0E6C8;
     border-radius: 8px; /* Round off corners */
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect, 0px horizontal, 4px vertical, 8px blur, light black color */
-    transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition(0.2s) for hover effect */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth transform and box-shadow transition(0.2s) for hover effect */
     padding: 10px;
     margin: 10px;
     font-size: 20px;
@@ -138,14 +143,15 @@ header h2 {
     justify-content: center; /* Horizontal alignment */
 }
 
-.genre-card:hover {
-    transform: translateY(-5px); /* Slightly lift the card on hover */
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Darker shadow on hover, more lifted and blurred, slightly darker */
-}
-
 .genre-card p {
     color:#184525;
     font-family: 'roboto', serif; /* Serif as a backup */
+}
+
+/* links styles of genre cards */
+.genre-card:hover {
+    transform: translateY(-5px); /* Slightly lift the card on hover */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Darker shadow on hover, more lifted and blurred, slightly darker */
 }
 
 .genre-card a{
@@ -157,6 +163,7 @@ header h2 {
     color: #0b3a1e;
 }
 
+/* Book detail html photo css */
 .book-photo {
     height:350px;
     display: flex; /* Makes the container a flexbox */
@@ -171,9 +178,10 @@ header h2 {
     object-fit: contain; /* Maintain aspect(height vs width) ratio */
 }
 
+/* Author detail html photo css */
 .author-photo{
     height:300px;
-    display:flex;
+    display:flex; /* Makes the container a flexbox */
     align-items: center; /* Vertical alignment */
     justify-content: center; /* Horizontal alignment */
     font-weight: bold;
@@ -185,14 +193,13 @@ header h2 {
     object-fit: contain; /* Maintain aspect(height vs width) ratio */
 }
 
+/* Books/Authors detail html card css */
 .detail-card{
     background-color:#F0FFF4;
     border: 1px solid #C0E6C8;
-    border-radius: 12px;
-    display: grid; 
+    border-radius: 12px; /* Round off corners */
+    display: grid; /* Makes the container a grid */
     grid-template-columns: 1fr 1fr; /* Spilt into two even columns */
-    border: 1px solid #ccc;
-    border-radius: 8px;
     padding: 20px;
     gap: 20px; /* Space between left and right */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect, 0px horizontal, 4px vertical, 8px blur, light black color */
@@ -200,16 +207,16 @@ header h2 {
 }
 
 .detail-left, .detail-right {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center images and text horizontally */
+    display: flex; /* Makes left and right a flexbox */
+    flex-direction: column; /* Stack images and text vertically */
+    align-items: center; /* Center images and text vertically */
 }
 
 .detail-left p, .detail-right p {
     text-align: center;
     font-size: 15px; /* Slightly larger for readability */
     color: #333; 
-    line-height: 1.5; /* Better readability */
+    line-height: 1.5; /* Larger height between lines for better readability */
 }
 
 .detail-left h2, .detail-right h2 {
@@ -218,6 +225,7 @@ header h2 {
     color: #184525; 
 }
 
+/* Links styles in detail cards */
 .detail-left a, .detail-right a {
     text-decoration: none; /* Remove underline */
     color: #333;      
@@ -228,11 +236,12 @@ header h2 {
     color: #0b3a1e; 
 }
 
+/* Genre detail html css */
 .genre-detail p {
     text-align: center;
     font-size: 15px;
     color: #333; 
-    line-height: 1.5; /* Better readability */
+    line-height: 1.5; /* Larger height between lines for better readability */
     margin: 10px 100px 40px 100px; /* Top 10px, Bottom 40px, Left & Right 30px */
     font-family: 'roboto', serif; /* Serif as a backup */
 }
@@ -255,13 +264,14 @@ header h2 {
     margin: 10px 100px 40px 100px; /* Top 10px, Bottom 40px, Left & Right 30px */
 }
 
+/* Navigation bar css */
 nav{
     display:flex; /* Makes nav a flexbox so the links and search bar can sit beside each other */
     justify-content: space-between; /* Space out the links and search bar */
     padding: 10px 20px; /* Padding around the nav */
     align-items: center; /* Vertically align items in the center */
     background-color: #7fb285;
-    font-family: 'merriweather';
+    font-family: 'merriweather', serif; /* Serif as a backup */
 }
 
 nav ul{
@@ -281,9 +291,9 @@ nav a{
     border-radius: 5px; /* Rounded corners */
     text-decoration: none; /* Removing underline */
     font-size: 17px;
-    font-family: 'merriweather';
+    font-family: 'merriweather', serif; /* Serif as a backup */
     font-weight: 600;
-    transition: background-color 0.3s; /* Transition for hover effect */
+    transition: background-color 0.3s; /* Smooth background-color transition(0.3s) for hover effect */
 }
 
 nav a:hover{
@@ -298,7 +308,7 @@ nav form {
 nav form input[type="search"] {
     padding: 10px 15px;
     border: 2px solid #15944a;
-    border-radius: 10px;
+    border-radius: 10px; /* Rounded corners */
     font-size: 17px;
 }
 
@@ -310,13 +320,14 @@ nav form button {
     border-radius: 5px; /* Rounded corners */
     font-size: 17px;
     margin-left: 10px; /* Space between input and button */
-    transition: background-color 0.3s; /* Transition for hover effect */
+    transition: background-color 0.3s; /* Smooth background-color transition(0.3s) for hover effect */
 }
 
 nav form button:hover {
     background-color: #0b3a1e; 
 }
 
+/* 404/500 error page css */
 .error-page {
     text-align: center;
 }
@@ -333,6 +344,7 @@ nav form button:hover {
     font-family: 'roboto', serif; /* Serif as a backup */
 }
 
+/* Footer css */
 footer {
     background-color: #000; 
     color: white;
@@ -349,11 +361,11 @@ footer p {
 
 footer a {
     color: #4CAF50; 
-    text-decoration: none;
+    text-decoration: none; /* Remove underline */
     font-weight: 500;
 }
 
 footer a:hover {
-    text-decoration: underline;
+    text-decoration: underline; /* Underline on hover */
     color: #66bb6a; 
 }

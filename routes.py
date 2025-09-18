@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request
 import sqlite3
 
+# Initialize Flask app
 app = Flask(__name__)
 
 
@@ -292,36 +293,6 @@ def search():
                            authors=authors, genres=genres, query=query)
 
 
-# Route for login page
-# GET method to display the login form
-# POST method to process the login form submission
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    # If user submits form
-    if request.method == "POST":
-        # Get username and password from form
-        username = request.form["username"]
-        password = request.form["password"]
-        conn = sqlite3.connect('books.db')
-        cur = conn.cursor()
-        cur.execute('''
-                    -- Check if username and password match a user in users
-                    -- table
-            SELECT * FROM users WHERE username = ? AND password = ?;
-        ''', (username, password))
-        user = cur.fetchone()  # Fetch the one result from query
-        conn.close()
-        # If user exists, login successful
-        if user:
-            # Store user id in session, so user can stay logged in across pages
-            session["user_id"] = user[0]
-            return redirect(url_for("home"))  # Redirect to home page
-        # If user does not exist, login failed
-        else:
-            return "Invalid username or password"
-    # If user just visits the login page, display the login form
-    return render_template("login.html", title="Login")
-
-
+# Run the app in debug mode
 if __name__ == '__main__':
     app.run(debug=True)

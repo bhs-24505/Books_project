@@ -2,17 +2,17 @@
 {% block content %}
 <h1>All Authors</h1>
 <div class="all-books"> 
-    {% for author in authors %} <!-- Looping through all authors -->
-    <div class="book-card"> <!-- Cards for authors that have a width of 150px -->
-        <a href="{{ url_for('author_by_id', id=author[0]) }}"> <!-- Create an url connecting to authors detail page based on id -->
+    {% for author in authors %} {# Looping through all authors #}
+    <div class="book-card"> {# Cards for authors #}
+        <a href="{{ url_for('author_by_id', id=author[0]) }}"> {# Create an url connecting to authors detail page based on id #}
             <div class="authors-photo">
-                <img src="{{ url_for('static', filename='images/authors/' + author[4]) }}" alt="{{ author[1] }} photo"> <!-- Author photo -->
+                <img src="{{ url_for('static', filename='images/authors/' + author[4]) }}" alt="{{ author[1] }} photo"> {# Author photo #}
             </div>
             <h3>{{ author[1] }}</h3>
             <p>Born: {{ author[2] }}</p>
             <p>Nationality: {{ author[3] }}</p>
         </a>
     </div>
-    {% endfor %} <!-- End of loop -->
+    {% endfor %} {# End of loop #}
 </div>
 {% endblock %}

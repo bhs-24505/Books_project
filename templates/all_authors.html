@@ -1,16 +1,16 @@
 {% extends "layout.html" %}
 {% block content %}
 <h1>{{ author[1] }}</h1>
-    <div class="detail-card"> <!-- Author detail card -->
-        <div class="detail-left"> <!-- Left side -->
+    <div class="detail-card"> {# Author detail card #}
+        <div class="detail-left"> {# Left side #}
             <div class="author-photo">
-                <img src="{{ url_for('static', filename='images/authors/' + author[4]) }}" alt="{{ author[1] }} photo"> <!-- Book cover image -->
+                <img src="{{ url_for('static', filename='images/authors/' + author[4]) }}" alt="{{ author[1] }} photo"> {# Author photo #}
             </div>
             <h2>{{ author[1] }}</h2>
             <p>Birth year: {{ author[2] }}</p>
             <p>Nationality: {{ author[3] }}</p>
         </div>
-        <div class="detail-right"> <!-- Right side -->
+        <div class="detail-right"> {# Right side #}
             <h2>{{ author[1] }}</h2>
             <p>Biography: {{ author[5] }}</p>
         </div>

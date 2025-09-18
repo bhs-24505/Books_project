@@ -6,24 +6,24 @@
 </section>
 
 <section class="books-by-genre">
-<h2>Books in {{ genre[1] }}</h2> <!-- Section for books in this genre -->
+<h2>Books in {{ genre[1] }}</h2> {# Section for books in this genre #}
 {% if books %}
     <div class="all-books">
-        {% for book in books %} <!-- Looping through all books -->
+        {% for book in books %} {# Looping through all books #}
         <div class="book-card">
-            <a href="{{ url_for('book_by_id', id=book[0]) }}"> <!-- Create an url connecting to books detail page based on id -->
+            <a href="{{ url_for('book_by_id', id=book[0]) }}"> {# Create an url connecting to books detail page based on id #}
             <div class="book-cover">
-                <img src="{{ url_for('static', filename='images/covers/' + book[2]) }}" alt="{{ book[1] }} cover"> <!-- Book cover image -->
+                <img src="{{ url_for('static', filename='images/covers/' + book[2]) }}" alt="{{ book[1] }} cover"> {# Book cover image #}
             </div>
             <h3>{{ book[1] }}</h3>
             <p>Year Published: {{ book[3] }}</p>
             <p>Genres: {{ book[5] }}</p>
-            <p>Rating: {{ book[4] }}</p> <!-- Year, genre and rating -->
+            <p>Rating: {{ book[4] }}</p> {# Year, genre and rating #}
             </a>
         </div>
         {% endfor %}
     </div>
-    {% else %} <!-- If no books found -->
+    {% else %} {# If no books found #}
     <p>No books found in {{ genre[1] }}.</p>
 {% endif %}
 </section>

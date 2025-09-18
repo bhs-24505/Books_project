@@ -2,9 +2,10 @@
 {% block content %}
 <h1>All Genres</h1>
 <div class="all-books">
-    {% for genre in genres %}
+    {% for genre in genres %} {# Looping through all genres #}
     <div class="genre-card">
-        <a href="{{ url_for('genre_by_id', id=genre[0]) }}">
+        <a href="{{ url_for('genre_by_id', id=genre[0]) }}"> {# Create an url connecting to genres detail page based on id #}
+            <h3>{{ genre[2] }}</h3>
         <p>{{ genre[1] }}</p>
         </a>
     </div>

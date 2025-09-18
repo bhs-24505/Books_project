@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
-
-    <link rel="icon" type="image/x-icon" href="">
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 
@@ -16,22 +14,22 @@
         <h2>Explore and discover your favorite books</h2>
     </header>
     <nav>
-        <ul> <!-- Unordered list to contain links -->
-            <li><a href="{{ url_for('home') }}">Home</a></li> <!-- Holds one link each in the nav bar -->
+        <ul> {# Unordered list to contain links #}
+            <li><a href="{{ url_for('home') }}">Home</a></li> {# Holds links in the nav bar #}
             <li><a href="{{ url_for('books') }}">Books</a></li>
             <li><a href="{{ url_for('authors') }}">Authors</a></li>
-            <li><a href="{{ url_for('genres') }}">Genres</a></li> <!-- Generate url for specific flask functions -->
+            <li><a href="{{ url_for('genres') }}">Genres</a></li> {# Generate url for specific flask functions #}
         </ul>
 
-        <form action="{{ url_for('search') }}" method="GET"> <!-- Search form -->
-            <input type="search" name="query" placeholder="Search..." required maxlength="40"> <!-- Action: form send to search route, method: add search input to the url -->
+        <form action="{{ url_for('search') }}" method="GET"> {# Search form #}
+            <input type="search" name="query" placeholder="Search..." required maxlength="40"> {# Action: form send to search route, method: add search input to the url, max 40 characters #}
             <button type="submit">Search</button>
         </form>
     </nav>
     <main>{% block content %}{% endblock %}</main>
     <footer>
         <p>&copy; 2025 My Book Library. All rights reserved.</p>
-        <p>All sources from <a href="https://www.goodreads.com/" target="_blank">Goodreads</a></p> <!-- Target _blank opens the link in a new tab -->
+        <p>All sources from <a href="https://www.goodreads.com/" target="_blank">Goodreads</a></p> {# Target _blank opens the link in a new tab #}
     </footer>
 </body>
 
